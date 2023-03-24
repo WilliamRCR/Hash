@@ -18,34 +18,28 @@ public class EjemploHash {
         String elemento;
         HashMap h = new HashMap();
        
-        
-        do{
-            try{
-                opcion = Integer.parseInt(JOptionPane.showInputDialog(null, """
-                     1. Insertar al inicio
-                     2. Insertar al Final
-                     3. Recorrer                                                     
-                     4. Buscar elemento                                                       
-                     5. Borrar un elemento
-                     6. Salir                                                                                                                                            
-                     Menu de opciones                                                       """, "Menu de Opciones",
-                        JOptionPane.INFORMATION_MESSAGE));
-                
-                switch(opcion){
-                    case 1:
-                        elemento = JOptionPane.showInputDialog(null, "Ingresar elemento del nodo",
-                                "Agregar nodo al inicio", JOptionPane.INFORMATION_MESSAGE);
-                                h.put(h, elemento);
-                        break;
-                }
-                
-            }catch(NumberFormatException n){
-                JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+         // Crear objeto de la clase CentroVacunacion
+        CentroVacunacion centro = new CentroVacunacion(h);
+
+        // Crear menú principal
+        String[] opciones = {"Agregar persona", "Eliminar persona", "Buscar persona", "Vacunar persona", "Obtener estado de vacunación", "Obtener personas no vacunadas", "Salir"};
+        int opcionSeleccionada = 0;
+        while(opcionSeleccionada != opciones.length - 1) {
+            opcionSeleccionada = JOptionPane.showOptionDialog(null, "Seleccione una opción:", "Centro de vacunación", 
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+
+            switch(opcionSeleccionada) {
+                case 0: // Agregar persona
+                    String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre de la persona:", "Agregar persona", JOptionPane.PLAIN_MESSAGE);
+                    int edad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la edad de la persona:", "Agregar persona", JOptionPane.PLAIN_MESSAGE));
+                    int cui = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el CUI de la persona:", "Agregar persona", JOptionPane.PLAIN_MESSAGE));
+                    
+                    Persona persona = new Persona(nombre, edad, cui);
+                    centro.agregarPersona(persona);
+                    JOptionPane.showMessageDialog(null, "Persona agregada correctamente.", "Agregar persona", JOptionPane.INFORMATION_MESSAGE);
+                    break;
             }
-            
-        }while(opcion != 3);
-        
-        
+        }
         
     
     }
